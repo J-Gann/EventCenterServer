@@ -1,0 +1,27 @@
+type Query {
+  info: String!
+  demos: [Demo!]!
+  demo(id: String!): Demo
+}
+
+type Mutation {
+  createDemo(
+    description: String!
+    date: String!
+    time: String!
+    location: String!
+    title: String!
+    pubKey: String # Public key to validate future updates of the create demo
+    hash: String # Hash of the all properties except "hash" and "pubKey" created with clients private key
+  ): Demo!
+}
+
+type Demo {
+  id: ID!
+  description: String!
+  date: String!
+  time: String!
+  location: String!
+  title: String!
+  pubKey: String # Hash of the all properties except "hash" and "pubKey" created with clients private key
+}
