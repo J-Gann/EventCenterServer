@@ -8,7 +8,11 @@ const prisma = new PrismaClient();
 const resolvers = {
   Query: {
     info: () => `This is the API for a demonstaration planning application.`,
-    demos: async (parent, args, { prisma }) => await prisma.demo.findMany(),
+    demos: async (parent, { ids }, { prisma }) => {
+      if (ids)
+        return await prisma.demo.findMany({ where: { id: { in: ids } } });
+      else return await prisma.demo.findMany();
+    },
     demo: async (parent, { id }, { prisma }) =>
       await prisma.demo.findUnique({ where: { id: id } }),
   },

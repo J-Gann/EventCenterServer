@@ -1,6 +1,6 @@
 type Query {
   info: String!
-  demos: [Demo!]!
+  demos(ids: [String!]): [Demo!]!
   demo(id: String!): Demo
 }
 
